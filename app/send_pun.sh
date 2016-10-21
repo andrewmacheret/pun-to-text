@@ -3,7 +3,7 @@
 AWS="$( which aws )"
 CURL="$( which curl )"
 
-PUN="$( "$CURL" -H "Accept: text/plain" https://pun.andrewmacheret.com )"
+PUN="$( "$CURL" -s -H "Accept: text/plain" https://pun.andrewmacheret.com )"
 
 if [[ $PUN == "" ]]; then
   exit 1

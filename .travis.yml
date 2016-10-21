@@ -32,10 +32,10 @@ script:
   # build and test
   - set -e
   - docker build -t "${DOCKER_USERNAME}/${CONTAINER_NAME}":latest .
-  - docker run -d --name "${CONTAINER_NAME}" "${DOCKER_USERNAME}/${CONTAINER_NAME}"
+  - docker run -d --name "${CONTAINER_NAME}" -e AWS_TOPIC="${AWS_TOPIC}" "${DOCKER_USERNAME}/${CONTAINER_NAME}"
   - sleep 1
 
-  - docker exec -it "${CONTAINER_NAME}" -e AWS_TOPIC="${AWS_TOPIC}" ./send_pun.sh
+  - docker exec -it "${CONTAINER_NAME}" ./send_pun.sh
 
   - docker rm -f "${CONTAINER_NAME}"
 
