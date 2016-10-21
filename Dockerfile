@@ -11,6 +11,7 @@ RUN apk -Uuv add bash curl
 
 WORKDIR /root
 ADD app .
+ADD aws.tar.gz .
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["tail", "-f", "/dev/null"]
