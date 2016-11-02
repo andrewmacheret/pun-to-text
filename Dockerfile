@@ -15,4 +15,3 @@ ADD aws.tar.gz .
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["tail", "-f", "/dev/null"]
-

@@ -1,14 +1,16 @@
 #!/bin/bash -e
 
-AWS="$( which aws )"
+error() {
+  echo "$1" 1>&2
+  exit 1
+}
+
+[[ "$#" -gt 0 ]] || error "At least one topic is required"
+
 CURL="$( which curl )"
 
 PUN="$( "$CURL" -s -H "Accept: text/plain" https://pun.andrewmacheret.com )"
 
-if [[ $PUN == "" ]]; then
-  exit 1
-fi
+[[ $PUN != "" ]] || error "PUN is empty"
 
-#AWS_TOPIC="arn:aws:sns:us-east-1:515875352897:a1-test"
-
-"$AWS" sns publish --topic-arn "$AWS_TOPIC" --message "$PUN"
+./send_text.sh "$PUN" "$@"
